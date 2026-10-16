@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="icon" href="assets/favicon.png">
+<script src="../theme.js"></script><script src="../shared/api.js" data-root="../"></script>
+<title>SmartBus – Live Tracking</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css" crossorigin="">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="../shared/site.css">
+</head>
+<body>
+<header>
+  <button class="ib" id="menu" aria-label="Menu" data-i="menu"></button>
+  <a class="chip" href="../index.html" aria-label="SmartBus home"><img class="logo lg-l" src="assets/logo.png" alt="TrackB logo"><img class="logo lg-d" src="assets/logo-dark.png" alt="" aria-hidden="true"></a>
+  <nav id="nav">
+    <button class="on" data-nav="track">Track Bus</button><button data-nav="services">Services</button><button data-nav="history">History</button><button data-nav="profile">Profile</button>
+  </nav>
+  <div class="hr">
+    <button class="ib" id="bell" aria-label="Notifications"><span data-i="bell" style="display:grid"></span><span class="dot" id="bdot"></span></button>
+    <div class="pop" id="npop" style="right:60px"></div>
+    <button class="um" id="um">Hello, Aarav <span data-i="chev" style="display:grid"></span></button>
+    <div class="pop" id="upop" style="min-width:170px">
+      <button data-u="My profile">My profile</button><button data-u="My tickets">My tickets</button><button data-u="Signed out">Sign out</button>
+    </div>
+    <button class="btn" id="book">Book Ticket</button>
+  </div>
+</header>
+
+<div class="shell" id="shell" data-open="false">
+<main>
+  <div class="title">
+    <button class="back" id="back" aria-label="Back" data-i="back"></button>
+    <div><h1>Live Tracking</h1><p>Track your bus in real-time and stay updated on its journey.</p></div>
+    <button class="btn ghost" id="openR"><span data-i="route" style="display:grid"></span><span>Route &amp; Stops</span></button>
+  </div>
+
+  <section class="card trip">
+    <div class="r1"><span class="code" id="bcode">HRTC Volvo</span><b>Delhi → Manali</b><span class="meta mut" id="breg">HP 01 AC 4521 · Volvo 9400 Multi-Axle AC Semi-Sleeper</span><span class="ok" id="status">On Time</span></div>
+    <div class="r2">
+      <span class="meta"><span data-i="cal" style="display:grid"></span><span id="tdate">Today</span></span>
+      <span class="meta"><span data-i="clock" style="display:grid"></span>06:30 PM</span>
+      <span class="meta o"><span data-i="seat" style="display:grid"></span><span id="seats">15 Seats Left</span></span>
+    </div>
+  </section>
+
+  <div class="map" id="map">
+    <div id="gmap" role="application" aria-label="Live map showing the bus on its route"></div>
+    <div class="mapin" id="mapin"><img src="assets/map.jpg" alt="Route map from Delhi to Manali (offline preview)"></div>
+    <div class="mtype" id="mtype" role="group" aria-label="Map type"><button class="on" data-l="map">Map</button><button data-l="sat">Satellite</button></div>
+    <a class="gl" id="gl" target="_blank" rel="noopener"><span data-i="ext" style="display:grid"></span>Open in Google Maps</a>
+    <div class="mc"><button id="full" aria-label="Full screen" data-i="full"></button><button id="myloc" aria-label="Show my location" data-i="locate"></button><button id="loc" aria-label="Centre on bus" data-i="bus"></button><button id="zi" aria-label="Zoom in" data-i="plus"></button><button id="zo" aria-label="Zoom out" data-i="minus"></button></div>
+    <div class="mstat" id="mstat" aria-live="off"><span class="lv"></span><span id="mcoord">Locating bus…</span></div>
+  </div>
+
+  <div class="info">
+    <div class="card"><div class="lbl" style="color:var(--gr)">Current Location</div>
+      <div class="big" id="locn">Murthal, Sonipat</div>
+      <div class="row" style="margin-top:6px"><span class="mut" id="locs">Haryana, India</span><span class="mut" style="display:flex;gap:5px;align-items:center"><span data-i="gauge" style="display:grid"></span><b id="spd" style="color:var(--tx)">65 km/h</b></span></div>
+    </div>
+    <div class="card"><div class="mut">Next Stop</div>
+      <div class="row"><span class="big" id="nxt">Panipat</span><b id="rem">120 km</b></div>
+      <div class="row"><span class="lbl" style="margin:0" id="eta">ETA: 01:45 PM (32 mins)</span><span class="mut">remaining</span></div>
+    </div>
+    <div class="card drv"><img class="av" src="assets/driver.jpg" alt="Driver Rajesh Kumar">
+      <div><div class="mut">Driver</div><div class="big">Rajesh Kumar</div><div class="mut"><span style="color:var(--or)">★</span> <b style="color:var(--tx)">4.8</b> (126 Reviews)</div></div>
+      <div class="cb"><button id="call" aria-label="Call driver" data-i="phone"></button><button id="chat" aria-label="Message driver" data-i="chat"></button></div>
+    </div>
+  </div>
+
+  <section class="card rev" id="reviews" aria-labelledby="revH">
+    <div class="rev-h"><div><h2 id="revH">Bus reviews</h2><p class="mut">What passengers say about <b id="revBus">HRTC Volvo · HP 01 AC 4521</b></p></div><button class="btn ghost" id="revWrite">Write a review</button></div>
+    <div class="rev-top">
+      <div class="rev-sc"><div class="rev-n" id="revAvg">4.6</div><div class="rev-st" id="revStars" aria-hidden="true"></div><div class="mut" id="revCnt">0 reviews</div></div>
+      <div class="rev-bars" id="revBars"></div>
+      <div class="rev-tags" id="revTags"></div>
+    </div>
+    <div class="rev-f" id="revF" role="group" aria-label="Filter reviews"></div>
+    <div class="rev-l" id="revList"></div>
+    <form class="rev-form" id="revForm" hidden novalidate>
+      <b>Rate your journey</b>
+      <div class="stars rev-pick" id="revPick" role="radiogroup" aria-label="Your rating"></div>
+      <div class="rev-row"><input id="revName" placeholder="Your name" maxlength="40" autocomplete="name" aria-label="Your name"><select id="revAsp" aria-label="What stood out"><option value="">What stood out? (optional)</option><option>Cleanliness</option><option>Punctuality</option><option>Driver</option><option>Comfort</option><option>Safety</option></select></div>
+      <textarea id="revTxt" rows="3" maxlength="400" placeholder="Share a few words about the bus, driver and ride (min. 10 characters)" aria-label="Your review"></textarea>
+      <div class="rev-row"><span class="mut" id="revMsg" role="status"></span><span style="display:flex;gap:8px"><button type="button" class="btn ghost" id="revCancel">Cancel</button><button type="submit" class="btn">Post review</button></span></div>
+    </form>
+  </section>
+
+  <section class="card rate">
+    <div class="mut" id="rtxt" style="font-size:13px">Did you know your experience?</div>
+    <div class="stars" id="stars"></div>
+  </section>
+
+  <div class="acts">
+    <button class="btn ghost" id="share"><span data-i="share" style="display:grid"></span>Share Tracking</button>
+    <button class="btn" id="help"><span data-i="help" style="display:grid"></span>Need Help?</button>
+  </div>
+</main>
+
+<aside id="aside" aria-label="Route and stops">
+  <h2>Route &amp; Stops <button id="closeR" aria-label="Close" data-i="close"></button></h2>
+  <ul class="stops" id="stops"></ul>
+  <div class="card sum"><div class="mut">Total Distance<b style="color:var(--tx)" id="sdist">535 km</b></div><div class="mut">Total Duration<b style="color:var(--tx)">13h 45m</b></div><div class="mut">Arrival Time<b style="color:var(--tx)">08:15 AM</b></div></div>
+</aside>
+<div class="bd" id="bd"></div>
+</div>
+
+<dialog id="dlg"><div class="dh"><span id="dt"></span><button id="dx" aria-label="Close" data-i="close"></button></div><div class="db" id="dbody"></div></dialog>
+<div class="toast" id="toast" role="status"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js" crossorigin=""></script>
+<script src="script.js"></script>
+<script src="../shared/site.js" data-root="../" defer></script>
+</body>
+</html>

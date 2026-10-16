@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#f15a0a" />
+  <meta name="description" content="Create your TrackB account for smarter journeys, live tracking, and easy booking." />
+  <script src="../theme.js"></script><script src="../shared/api.js" data-root="../"></script>
+<title>Create your account · TrackB</title>
+  <link rel="icon" href="assets/trackb-mark.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+<link rel="stylesheet" href="../shared/site.css">
+</head>
+<body>
+  <main class="page-shell">
+    <section class="visual-panel" aria-label="TrackB smart travel">
+      <a class="brand" href="../index.html" id="brandHome" aria-label="TrackB home">
+        <img src="assets/trackb-mark.png" alt="" class="brand-mark lt" />
+        <img src="assets/trackb-mark-dark.png" alt="" class="brand-mark dk" aria-hidden="true" />
+        <span>TrackB</span>
+      </a>
+      <div class="visual-copy">
+        <h1>Move smarter.<br /><span>Travel better.</span></h1>
+        <p>Your journey, connected from start to finish.</p>
+      </div>
+      <img class="hero-image" src="assets/trackb-hero.jpg" alt="TrackB coach travelling along a road beside a city skyline" />
+      <div class="visual-note"><span class="live-dot"></span> Your journey starts here</div>
+    </section>
+
+    <section class="form-panel" aria-label="Create a TrackB account">
+      <a class="back-home" href="../index.html" id="backHome"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1z"/></svg> Back to Home</a>
+      <div class="form-wrap">
+        <div class="form-heading">
+          <div class="mobile-brand"><img src="assets/trackb-mark.png" alt="" /><span>TrackB</span></div>
+          <p class="eyebrow">WELCOME ABOARD</p>
+          <h2 id="formTitle">Create Your Account</h2>
+          <p class="subtitle" id="formSubtitle">Join TrackB and start your smart travel journey today.</p>
+        </div>
+
+        <form id="signupForm" novalidate>
+          <div class="fields-grid">
+            <div class="field" id="nameField">
+              <label for="fullName">Full Name</label>
+              <div class="input-wrap"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg><input id="fullName" name="fullName" autocomplete="name" placeholder="Enter your full name" required minlength="2" /></div>
+              <small class="error"></small>
+            </div>
+            <div class="field">
+              <label for="email">Email Address</label>
+              <div class="input-wrap"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/></svg><input id="email" name="email" type="email" autocomplete="email" placeholder="Enter your email address" required /></div>
+              <small class="error"></small>
+            </div>
+            <div class="field" id="phoneField">
+              <label for="phone">Phone Number</label>
+              <div class="input-wrap"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3H4a1 1 0 0 0-1 1c0 9.4 7.6 17 17 17a1 1 0 0 0 1-1v-3l-5-2-2 3a14 14 0 0 1-7-7l3-2z"/></svg><input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="Enter your phone number" required /></div>
+              <small class="error"></small>
+            </div>
+            <div class="field">
+              <label for="password">Password</label>
+              <div class="input-wrap"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><input id="password" name="password" type="password" autocomplete="new-password" placeholder="Create a password" required minlength="8" /><button class="visibility-toggle" type="button" data-target="password" aria-label="Show password"><svg viewBox="0 0 24 24"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg></button></div>
+              <small class="error"></small>
+            </div>
+            <div class="field full-width" id="confirmField">
+              <label for="confirmPassword">Confirm Password</label>
+              <div class="input-wrap"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><input id="confirmPassword" name="confirmPassword" type="password" autocomplete="new-password" placeholder="Confirm your password" required /><button class="visibility-toggle" type="button" data-target="confirmPassword" aria-label="Show confirm password"><svg viewBox="0 0 24 24"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg></button></div>
+              <small class="error"></small>
+            </div>
+          </div>
+
+          <label class="terms-row" for="terms"><input type="checkbox" id="terms" name="terms" /><span class="custom-check" aria-hidden="true"></span><span>I agree to the <a href="../pages/terms.html" class="text-link" data-info="Terms & Conditions">Terms &amp; Conditions</a> and <a href="../pages/privacy.html" class="text-link" data-info="Privacy Policy">Privacy Policy</a></span></label>
+          <p class="terms-error" id="termsError" role="alert"></p>
+          <button class="primary-btn" id="submitBtn" type="submit"><span>Create Account</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></button>
+        </form>
+
+        <div class="separator"><span></span><p>or sign up with</p><span></span></div>
+        <div class="social-row">
+          <button type="button" class="social-btn" data-provider="Google"><span class="google-g">G</span> Google</button>
+          <button type="button" class="social-btn" data-provider="Facebook"><svg class="facebook-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11"/><path d="M13.5 20v-7h2.4l.4-2.8h-2.8V8.4c0-.8.3-1.4 1.4-1.4h1.5V4.5c-.3 0-1.2-.1-2.3-.1-2.3 0-3.8 1.4-3.8 3.9v1.9H8v2.8h2.3v7z"/></svg> Facebook</button>
+          <button type="button" class="social-btn" data-provider="Apple"><svg class="apple-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M16.8 12.8c0-2.2 1.8-3.3 1.9-3.4a4.2 4.2 0 0 0-3.3-1.8c-1.4-.2-2.7.8-3.4.8s-1.8-.8-3-.8a4.5 4.5 0 0 0-3.8 2.3c-1.6 2.8-.4 6.9 1.1 9.1.7 1.1 1.6 2.3 2.8 2.2 1.1 0 1.5-.7 2.9-.7s1.8.7 3 .7 2-1.1 2.7-2.2a10 10 0 0 0 1.2-2.5 3.8 3.8 0 0 1-2.1-3.7ZM14.5 6.1A4 4 0 0 0 15.4 3a4.2 4.2 0 0 0-2.8 1.4 3.8 3.8 0 0 0-.9 3 3.5 3.5 0 0 0 2.8-1.3Z"/></svg> Apple</button>
+        </div>
+        <p class="login-prompt" id="loginPrompt">Already have an account? <button type="button" id="loginLink">Log in</button></p>
+        <div class="toast" id="toast" role="status" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <footer class="benefits">
+      <div class="benefit"><div class="benefit-icon"><svg viewBox="0 0 24 24"><path d="M12 2 20 5v6c0 5-3.4 8.8-8 11-4.6-2.2-8-6-8-11V5z"/><path d="m8 12 2.5 2.5L16 9"/></svg></div><div><h3>Secure &amp; Safe</h3><p>Your data is protected<br />with top-notch security</p></div></div>
+      <div class="benefit"><div class="benefit-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><div><h3>Real-time Tracking</h3><p>Track your bus live and get<br />real-time updates</p></div></div>
+      <div class="benefit"><div class="benefit-icon"><svg viewBox="0 0 24 24"><path d="M4 7h16a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2h-5l-3 4-3-4H4a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2Z"/><path d="M8 10v4m4-4v4m4-4v4"/></svg></div><div><h3>Easy Booking</h3><p>Book tickets in seconds<br />with a seamless experience</p></div></div>
+      <div class="benefit"><div class="benefit-icon"><svg viewBox="0 0 24 24"><path d="M4 13v-2a8 8 0 0 1 16 0v2"/><rect x="3" y="12" width="4" height="7" rx="2"/><rect x="17" y="12" width="4" height="7" rx="2"/><path d="M17 19a5 5 0 0 1-5 3h-1"/></svg></div><div><h3>24/7 Support</h3><p>We're here to help you<br />anytime, anywhere</p></div></div>
+    </footer>
+  </main>
+  <script src="app.js"></script>
+<script src="../shared/site.js" data-root="../" defer></script>
+</body>
+</html>

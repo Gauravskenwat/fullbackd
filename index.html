@@ -1,0 +1,355 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="icon" href="assets/smartbus-logo.png">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#df5a00">
+<script>document.documentElement.classList.add("js")</script>
+<script src="theme.js"></script><script src="shared/api.js" data-root="./"></script>
+<title>SmartBus — Book, Track & Travel Smarter</title>
+<style>
+:root{--orange:#df5a00;--orange2:#f07812;--ink:#171717;--muted:#6c6c6c;--cream:#fff9f3;--line:#eee5dc;--white:#fff;--dark:#211508;--gold:#ffc928;--shadow:0 7px 22px #2d170b0b;--card:#fff;--soft:#fff0d4}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--cream);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:14px}button,input,select{font:inherit}button,a{ -webkit-tap-highlight-color:transparent}button{cursor:pointer}a{color:inherit;text-decoration:none}.container{width:min(1280px,calc(100% - 48px));margin-inline:auto}
+header{height:62px;border-bottom:1px solid var(--line);background:#fffaf6eF;display:flex;align-items:center;position:sticky;top:0;z-index:20;backdrop-filter:blur(12px)}.nav{display:flex;align-items:center;justify-content:space-between;gap:24px}.brand{display:flex;align-items:center;gap:8px;font-weight:800;color:var(--orange);font-size:17px}.brand img{width:28px;height:28px;object-fit:contain;border-radius:8px}.nav-links{display:flex;align-items:center;gap:26px;margin-left:auto}.nav-links a{font-size:12px;color:#282828;transition:color .2s}.nav-links a:hover{color:var(--orange)}.nav-actions{display:flex;align-items:center;gap:12px}.btn{border:0;border-radius:9px;padding:11px 17px;background:var(--orange);color:#fff;font-weight:650;font-size:12px;box-shadow:0 3px 8px #df5a001c;transition:transform .18s,background .18s}.btn:hover{background:#c94f00;transform:translateY(-1px)}.btn.ghost{background:transparent;color:var(--orange);box-shadow:none}.btn.outline{background:transparent;color:var(--orange);border:1px solid #e8a16d;box-shadow:none}.menu-btn{border:0;background:transparent;font-size:23px;line-height:1;padding:5px;color:#333;display:none}
+.hero-copy{text-align:center;padding:35px 0 18px}.live-pill{display:inline-flex;align-items:center;gap:6px;padding:6px 11px;border-radius:20px;background:#fff0d2;color:#b55a00;font-size:11px;font-weight:650}.live-dot{width:6px;height:6px;background:#ffb31a;border-radius:50%;box-shadow:0 0 0 3px #ffb31a22}.hero-copy h1{font-size:clamp(29px,3.1vw,42px);line-height:1.15;letter-spacing:-1.6px;margin:12px 0 9px;font-weight:820}.accent{color:var(--orange)}.hero-copy p{margin:0;color:var(--muted);font-size:14px;line-height:1.6}
+.search-panel{max-width:700px;margin:0 auto 12px;padding:10px;display:grid;grid-template-columns:1fr 38px 1fr auto;gap:10px;background:#fff;border:1px solid #f3eae1;border-radius:15px;box-shadow:var(--shadow);align-items:end}.field label{display:block;font-size:10px;color:#555;margin:0 0 5px 3px}.field-wrap{display:flex;align-items:center;gap:8px;border:1px solid #ece8e3;background:#fff;border-radius:9px;padding:0 11px;height:38px}.field-wrap span{color:#8c8c8c}.field-wrap input{width:100%;min-width:0;border:0;outline:0;background:transparent;font-size:12px;color:#222}.swap-btn{align-self:end;margin-bottom:1px;width:36px;height:38px;border:1px solid #f1e6da;border-radius:10px;background:#fffaf5;color:var(--orange);font-size:17px}.search-panel .btn{height:38px}
+.banner-wrap{position:relative;margin:12px auto 20px}.banner{width:100%;height:clamp(170px,22vw,270px);display:block;object-fit:cover;object-position:center 56%;border-radius:14px;box-shadow:0 8px 24px #2815080b}.route-strip{position:absolute;bottom:12px;left:22px;right:22px;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}.route-card{display:flex;align-items:center;gap:9px;min-width:0;background:#fff;border:1px solid #f1e9df;border-radius:12px;padding:10px 12px;box-shadow:0 4px 15px #0000000c;text-align:left;color:#202020;transition:transform .2s,border .2s}.route-card:hover,.route-card.selected{transform:translateY(-3px);border-color:#e77b29}.route-code{background:#ffd33b;border-radius:5px;padding:4px 6px;font-size:9px;font-weight:800;white-space:nowrap}.route-details{min-width:0;flex:1}.route-line{display:flex;align-items:center;justify-content:space-between;gap:5px;font-size:10px;font-weight:750;white-space:nowrap}.route-time{display:flex;justify-content:space-between;gap:4px;color:#777;font-size:9px;margin-top:5px;white-space:nowrap}.seats{color:var(--orange)}.banner-next{position:absolute;right:10px;bottom:47px;border:0;background:#fff;color:#555;border-radius:50%;width:30px;height:30px;font-size:20px;box-shadow:0 2px 8px #0002}
+.section-heading{display:flex;justify-content:space-between;align-items:center;gap:16px;margin:6px 0 12px}.section-heading h2{font-size:17px;margin:0 0 3px;letter-spacing:-.3px}.section-heading p{margin:0;color:var(--muted);font-size:11px}.small-btn{border:1px solid #e7a170;background:transparent;color:var(--orange);padding:7px 12px;border-radius:9px;font-size:10px;font-weight:650;white-space:nowrap}
+.services{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:10px;margin-bottom:18px}.service{min-height:65px;border:1px solid #f1e8df;background:#fff;border-radius:12px;display:flex;align-items:center;justify-content:center;gap:8px;padding:10px 8px;color:#292929;box-shadow:0 4px 14px #351a0805;transition:transform .18s,border .18s}.service:hover{transform:translateY(-3px);border-color:#f2b27d}.service-icon{display:grid;place-items:center;flex:0 0 28px;height:28px;background:#fff0d4;border-radius:50%;color:var(--orange);font-size:15px}.service span:last-child{font-size:10px;font-weight:650;white-space:nowrap}
+.promo{display:grid;grid-template-columns:.95fr 1.2fr;gap:28px;align-items:center;background:#fff;border:1px solid #f1e8df;border-radius:13px;padding:0 22px 0 0;margin:0 0 24px;overflow:hidden;box-shadow:var(--shadow)}.promo img{width:100%;height:205px;object-fit:cover;display:block}.promo-content{padding:18px 0}.eyebrow{display:inline-block;background:#fff0d4;color:#b75a00;border-radius:20px;padding:5px 10px;font-size:10px;font-weight:700}.promo h2{font-size:19px;letter-spacing:-.4px;margin:10px 0 8px}.promo p{font-size:11px;line-height:1.65;color:#686868;margin:0 0 8px}.promo .btn{margin-top:4px;padding:9px 13px;font-size:10px}
+footer{background:var(--dark);color:#fff7ed;padding:22px 0 12px}.footer-grid{display:grid;grid-template-columns:1.25fr .8fr .8fr .95fr 1.15fr;gap:28px}.footer-brand .brand{color:#ff7a18}.footer-brand p{font-size:10px;line-height:1.7;color:#d4c5b6;max-width:190px}.socials{display:flex;gap:8px;margin-top:12px}.socials button{border:1px solid #5d4833;color:#fff;background:#332415;border-radius:50%;width:26px;height:26px}.footer-col h3{font-size:11px;margin:0 0 10px}.footer-col a,.footer-col p{display:block;font-size:10px;color:#d4c5b6;margin:0 0 7px}.footer-col a:hover{color:#ff9a4d}.newsletter-form{display:flex;flex-direction:column;gap:7px}.newsletter-form input{width:100%;border:1px solid #e7ddd2;border-radius:7px;background:#fff;color:#222;padding:9px 10px;font-size:11px;outline-color:#ff9a4d}.newsletter-form .btn{padding:9px}.footer-bottom{border-top:1px solid #4b3826;margin-top:18px;padding-top:11px;text-align:center;font-size:9px;color:#bba996}
+.toast{position:fixed;bottom:22px;left:50%;transform:translate(-50%,20px);opacity:0;pointer-events:none;background:#25190f;color:#fff;padding:12px 18px;border-radius:12px;box-shadow:0 10px 30px #0003;z-index:60;transition:all .25s;max-width:calc(100% - 32px);font-size:13px}.toast.show{opacity:1;transform:translate(-50%,0)}
+.modal-backdrop{position:fixed;inset:0;background:#160d08a8;display:none;align-items:center;justify-content:center;padding:20px;z-index:50}.modal-backdrop.open{display:flex}.modal{background:#fffaf6;border-radius:18px;padding:25px;width:min(420px,100%);box-shadow:0 20px 70px #0004;position:relative}.modal h2{margin:0 0 6px;font-size:23px}.modal p{color:var(--muted);font-size:12px;margin:0 0 18px}.modal-close{position:absolute;right:14px;top:12px;border:0;background:transparent;font-size:24px;color:#555}.modal-form{display:grid;gap:12px}.modal-form label{font-size:11px;font-weight:650;display:block;margin-bottom:5px}.modal-form input{width:100%;border:1px solid #e8ded3;border-radius:9px;padding:12px;outline-color:#ed8c42}.modal-form .btn{padding:12px}.modal-switch{text-align:center;font-size:12px;margin-top:15px;color:#666}.modal-switch button{border:0;background:transparent;color:var(--orange);font-weight:700}
+@media(max-width:1000px){.services{grid-template-columns:repeat(4,minmax(0,1fr))}.route-strip{gap:7px;left:12px;right:12px}.route-card{padding:8px}.route-code{font-size:8px}.route-line{font-size:9px}.route-time{font-size:8px}.footer-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.footer-brand{grid-row:span 2}}
+@media(max-width:700px){.container{width:calc(100% - 28px)}header{height:58px}.nav{gap:10px}.brand{font-size:15px}.nav-links{display:none;position:absolute;top:57px;left:0;right:0;background:#fffaf6;padding:18px 22px;border-bottom:1px solid var(--line);flex-direction:column;align-items:flex-start;gap:18px}.nav-links.open{display:flex}.nav-actions{gap:5px}.nav-actions .ghost{display:none}.nav-actions .btn{padding:9px 11px}.menu-btn{display:block}.hero-copy{padding:27px 0 16px}.hero-copy h1{letter-spacing:-.9px;font-size:30px}.hero-copy p{font-size:12px;padding-inline:8px}.search-panel{grid-template-columns:1fr 36px 1fr;gap:7px;padding:9px}.search-panel .btn{grid-column:1/-1;width:100%}.field-wrap{padding:0 8px}.field-wrap input{font-size:11px}.banner-wrap{margin-top:10px}.banner{height:220px;object-position:center}.route-strip{position:static;display:flex;overflow-x:auto;padding:9px 1px 4px;scroll-snap-type:x mandatory}.route-card{flex:0 0 190px;scroll-snap-align:start;padding:10px}.banner-next{bottom:auto;top:45%;right:8px}.section-heading h2{font-size:16px}.services{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.service{justify-content:flex-start;padding:11px}.service span:last-child{font-size:11px}.promo{grid-template-columns:1fr;gap:0;padding:0;margin-bottom:18px}.promo img{height:190px}.promo-content{padding:18px}.promo h2{font-size:18px}.footer-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:23px 18px}.footer-brand{grid-row:auto}.newsletter{grid-column:1/-1}.footer-bottom{line-height:1.6}}
+@media(max-width:380px){.hero-copy h1{font-size:26px}.nav-actions .btn{font-size:10px;padding:8px}.brand{font-size:13px}.brand img{width:25px;height:25px}.services{grid-template-columns:1fr 1fr}.service{gap:6px;padding:9px 7px}.service-icon{flex-basis:25px;height:25px}.service span:last-child{font-size:10px}.footer-grid{gap:20px 12px}}
+/* ===== Soft glow background ===== */
+body{background-image:radial-gradient(circle at 100% 0,#df5a0016,transparent 480px),radial-gradient(circle at 0 55%,#ffc9281a,transparent 420px)}
+.search-panel,.promo{background-image:radial-gradient(circle at 100% 0,#ffc92822,transparent 240px)}
+.service{background-image:radial-gradient(circle at 100% 0,#df5a0012,transparent 90px)}
+footer{background-image:radial-gradient(circle at 92% 0,#df5a0038,transparent 300px),radial-gradient(circle at 4% 100%,#ffc92820,transparent 260px)}
+/* TrackB logo sizing */
+.brand img{width:auto!important;height:30px!important;border-radius:0!important}@media(max-width:380px){.brand img{height:25px!important}}
+
+/* ===== Dark theme: system setting or saved choice ===== */
+.logo-d{display:none!important}
+@media(prefers-color-scheme:dark){
+:root:not([data-theme="light"]){--ink:#f3ede8;--muted:#a9a099;--cream:#17130f;--line:#362f28;--shadow:0 7px 22px #0006;--card:#221d18;--soft:#3b2517;color-scheme:dark}
+:root:not([data-theme="light"]) body{background-image:radial-gradient(circle at 100% 0,#df5a0026,transparent 480px),radial-gradient(circle at 0 55%,#ffc9280f,transparent 420px)}
+:root:not([data-theme="light"]) header{background:#17130feF}
+:root:not([data-theme="light"]) .nav-links a{color:#e8dfd7}
+:root:not([data-theme="light"]) .nav-links a:hover{color:var(--orange2)}
+:root:not([data-theme="light"]) .menu-btn{color:#e8dfd7}
+:root:not([data-theme="light"]) .btn.outline{border-color:#6b4328}
+:root:not([data-theme="light"]) .small-btn{border-color:#6b4328}
+:root:not([data-theme="light"]) .btn.ghost{color:#ff8a3d}
+:root:not([data-theme="light"]) .live-pill{background:#3b2517;color:#ffb36b}
+:root:not([data-theme="light"]) .search-panel,:root:not([data-theme="light"]) .promo,:root:not([data-theme="light"]) .service,:root:not([data-theme="light"]) .route-card{background-color:#221d18}
+:root:not([data-theme="light"]) .search-panel{border-color:#362f28}
+:root:not([data-theme="light"]) .field label{color:#b9afa6}
+:root:not([data-theme="light"]) .field-wrap{background:#17130f;border-color:#3d352d}
+:root:not([data-theme="light"]) .field-wrap span{color:#a9a099}
+:root:not([data-theme="light"]) .field-wrap input{color:#f3ede8}
+:root:not([data-theme="light"]) .swap-btn{background:#2a221b;border-color:#3d352d}
+:root:not([data-theme="light"]) .banner{box-shadow:0 8px 24px #0006}
+:root:not([data-theme="light"]) .route-card{border-color:#362f28;color:#f3ede8}
+:root:not([data-theme="light"]) .route-time{color:#a9a099}
+:root:not([data-theme="light"]) .route-card:hover,:root:not([data-theme="light"]) .route-card.selected{border-color:#e77b29}
+:root:not([data-theme="light"]) .banner-next{background:#221d18;color:#f3ede8}
+:root:not([data-theme="light"]) .service{border-color:#362f28;color:#f3ede8;box-shadow:0 4px 14px #0004}
+:root:not([data-theme="light"]) .service:hover{border-color:#e77b29}
+:root:not([data-theme="light"]) .service-icon{background:#3b2517}
+:root:not([data-theme="light"]) .promo{border-color:#362f28}
+:root:not([data-theme="light"]) .eyebrow{background:#3b2517;color:#ffb36b}
+:root:not([data-theme="light"]) .promo p{color:#b9afa6}
+:root:not([data-theme="light"]) .modal{background:#221d18}
+:root:not([data-theme="light"]) .modal-close{color:#c9bfb6}
+:root:not([data-theme="light"]) .modal-form input{background:#17130f;border-color:#3d352d;color:#f3ede8}
+:root:not([data-theme="light"]) .modal-switch{color:#a9a099}
+:root:not([data-theme="light"]) .newsletter-form input{background:#2a2118;border-color:#4b3826;color:#f3ede8}
+:root:not([data-theme="light"]) .logo-l{display:none!important}
+:root:not([data-theme="light"]) .logo-d{display:inline-block!important}
+@media(max-width:700px){:root:not([data-theme="light"]) .nav-links{background:#1d1813}}
+}
+:root[data-theme="dark"]{--ink:#f3ede8;--muted:#a9a099;--cream:#17130f;--line:#362f28;--shadow:0 7px 22px #0006;--card:#221d18;--soft:#3b2517;color-scheme:dark}
+:root[data-theme="dark"] body{background-image:radial-gradient(circle at 100% 0,#df5a0026,transparent 480px),radial-gradient(circle at 0 55%,#ffc9280f,transparent 420px)}
+:root[data-theme="dark"] header{background:#17130feF}
+:root[data-theme="dark"] .nav-links a{color:#e8dfd7}
+:root[data-theme="dark"] .nav-links a:hover{color:var(--orange2)}
+:root[data-theme="dark"] .menu-btn{color:#e8dfd7}
+:root[data-theme="dark"] .btn.outline{border-color:#6b4328}
+:root[data-theme="dark"] .small-btn{border-color:#6b4328}
+:root[data-theme="dark"] .btn.ghost{color:#ff8a3d}
+:root[data-theme="dark"] .live-pill{background:#3b2517;color:#ffb36b}
+:root[data-theme="dark"] .search-panel,:root[data-theme="dark"] .promo,:root[data-theme="dark"] .service,:root[data-theme="dark"] .route-card{background-color:#221d18}
+:root[data-theme="dark"] .search-panel{border-color:#362f28}
+:root[data-theme="dark"] .field label{color:#b9afa6}
+:root[data-theme="dark"] .field-wrap{background:#17130f;border-color:#3d352d}
+:root[data-theme="dark"] .field-wrap span{color:#a9a099}
+:root[data-theme="dark"] .field-wrap input{color:#f3ede8}
+:root[data-theme="dark"] .swap-btn{background:#2a221b;border-color:#3d352d}
+:root[data-theme="dark"] .banner{box-shadow:0 8px 24px #0006}
+:root[data-theme="dark"] .route-card{border-color:#362f28;color:#f3ede8}
+:root[data-theme="dark"] .route-time{color:#a9a099}
+:root[data-theme="dark"] .route-card:hover,:root[data-theme="dark"] .route-card.selected{border-color:#e77b29}
+:root[data-theme="dark"] .banner-next{background:#221d18;color:#f3ede8}
+:root[data-theme="dark"] .service{border-color:#362f28;color:#f3ede8;box-shadow:0 4px 14px #0004}
+:root[data-theme="dark"] .service:hover{border-color:#e77b29}
+:root[data-theme="dark"] .service-icon{background:#3b2517}
+:root[data-theme="dark"] .promo{border-color:#362f28}
+:root[data-theme="dark"] .eyebrow{background:#3b2517;color:#ffb36b}
+:root[data-theme="dark"] .promo p{color:#b9afa6}
+:root[data-theme="dark"] .modal{background:#221d18}
+:root[data-theme="dark"] .modal-close{color:#c9bfb6}
+:root[data-theme="dark"] .modal-form input{background:#17130f;border-color:#3d352d;color:#f3ede8}
+:root[data-theme="dark"] .modal-switch{color:#a9a099}
+:root[data-theme="dark"] .newsletter-form input{background:#2a2118;border-color:#4b3826;color:#f3ede8}
+:root[data-theme="dark"] .logo-l{display:none!important}
+:root[data-theme="dark"] .logo-d{display:inline-block!important}
+@media(max-width:700px){:root[data-theme="dark"] .nav-links{background:#1d1813}}
+
+/* ===== Offer carousel, scroll sections, bottom nav ===== */
+body.js{padding-bottom:0}.scroll-bar{position:fixed;top:0;left:0;right:0;height:3px;z-index:40;pointer-events:none}.scroll-bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--orange),var(--gold))}
+.offers{position:relative;margin:12px 0 18px;border-radius:16px;overflow:hidden;box-shadow:var(--shadow);background:#2a1608}
+.slides{display:flex;transition:transform .7s cubic-bezier(.4,0,.2,1);will-change:transform}
+.slide{flex:0 0 100%;min-height:clamp(210px,24vw,310px);position:relative;display:flex;align-items:center;color:#fff;background-size:cover;background-position:center}
+.slide::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#140a04ea 0,#140a04b0 42%,#140a0400 78%)}
+.slide.r{justify-content:flex-end}.slide.r::before{background:linear-gradient(270deg,#140a04ea 0,#140a04b0 42%,#140a0400 78%)}
+.s1{background-image:url(assets/slides/slide-1.jpg);background-position:center}.s2{background-image:url(assets/slides/slide-2.jpg);background-position:center}.s3{background-image:url(assets/slides/slide-3.jpg);background-position:center}
+.s0{background:#2a1a12}.s0 img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:62% 50%;display:block;image-rendering:auto}.s0::before{z-index:1;background:linear-gradient(270deg,#0f0704f2 0,#0f0704c2 34%,#0f070438 62%,#0f070400 80%),linear-gradient(0deg,#0f070466 0,#0f070400 40%)}.s0 .slide-body{z-index:2}.s0 h2{text-shadow:0 2px 18px #0008}
+.s4{background-image:url(assets/slides/slide-4.jpg);background-position:center}.s4::before{background:linear-gradient(90deg,#140a04ea 0,#140a04b0 42%,#140a0400 78%)}
+.s4-big{position:absolute;right:clamp(70px,9vw,140px);top:50%;transform:translateY(-50%) rotate(-6deg);font-size:clamp(70px,11vw,150px);font-weight:900;letter-spacing:-4px;line-height:.9;color:#fff;text-shadow:0 8px 30px #0003;display:flex;flex-direction:column;align-items:flex-start}.s4-big small{font-size:.38em;letter-spacing:6px;opacity:.9}
+.slide-body{position:relative;padding:28px clamp(22px,6vw,70px) 40px;max-width:600px}.tag{display:inline-block;background:#ffc928;color:#3b2000;font-size:10px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;border-radius:20px;padding:4px 10px}
+.slide h2{font-size:clamp(21px,3vw,36px);line-height:1.12;letter-spacing:-.9px;margin:12px 0 8px}.slide p{margin:0 0 16px;font-size:clamp(12px,1.2vw,14px);line-height:1.55;color:#fff1e3;max-width:440px}
+.slide-cta{display:flex;align-items:center;gap:12px;flex-wrap:wrap}.slide-cta .btn{padding:11px 18px}
+.code{border:1.5px dashed #ffffffb0;border-radius:9px;padding:9px 13px;font-size:11px;cursor:pointer;background:#ffffff14;transition:background .2s}.code:hover{background:#ffffff2e}.code b{letter-spacing:1px;margin-left:3px}
+.car-btn{position:absolute;top:50%;transform:translateY(-50%);width:36px;height:36px;border-radius:50%;border:0;background:#ffffffd9;color:#2a1608;font-size:22px;line-height:1;display:grid;place-items:center;box-shadow:0 3px 12px #0004;opacity:0;transition:opacity .2s,background .2s;z-index:3}.car-btn:hover{background:#fff}.offers:hover .car-btn,.car-btn:focus-visible{opacity:1}.car-btn.prev{left:12px}.car-btn.next{right:12px}
+.dots{position:absolute;left:0;right:0;bottom:12px;display:flex;justify-content:center;gap:7px;z-index:3}.dots button{width:8px;height:8px;border-radius:8px;border:0;padding:0;background:#ffffff80;transition:width .3s,background .3s}.dots button.on{width:24px;background:#fff}
+.car-progress{position:absolute;left:0;right:0;bottom:0;height:3px;background:#ffffff26;z-index:3}.car-progress i{display:block;height:100%;width:0;background:var(--gold)}
+.routes-wrap{margin-bottom:18px}.routes-wrap .route-strip{position:static;display:flex;gap:12px;overflow-x:auto;padding:4px 2px 10px;scroll-snap-type:x mandatory;scrollbar-width:thin}.routes-wrap .route-card{flex:0 0 232px;scroll-snap-align:start;background:var(--card);color:var(--ink);border-color:var(--line)}.routes-wrap .route-time{color:var(--muted)}
+.block{margin:26px 0}.rv{transition:opacity .6s ease,transform .6s ease}html.js .rv:not(.in){opacity:0;transform:translateY(22px)}
+.coupons{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.coupon{min-width:0;display:grid;grid-template-columns:auto 1fr;grid-template-rows:auto auto;gap:4px 12px;align-items:center;text-align:left;background:var(--card);color:var(--ink);border:1.5px dashed #e8a16d;border-radius:13px;padding:14px;transition:transform .18s,box-shadow .18s}.coupon:hover{transform:translateY(-3px);box-shadow:var(--shadow)}.coupon .pct{grid-row:1/3;width:52px;height:52px;border-radius:12px;background:linear-gradient(135deg,var(--orange),var(--orange2));color:#fff;font-weight:850;font-size:15px;display:grid;place-items:center}.coupon .ct b{display:block;font-size:12px}.coupon .ct small{color:var(--muted);font-size:10px}.coupon .cc{grid-column:2;justify-self:start;font-size:10px;font-weight:800;letter-spacing:1px;color:var(--orange);background:var(--soft);border-radius:6px;padding:3px 8px}
+.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;counter-reset:x}.steps li{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:16px;position:relative}.steps .n{width:30px;height:30px;border-radius:50%;background:var(--orange);color:#fff;font-weight:800;font-size:13px;display:grid;place-items:center;margin-bottom:10px}.steps b{font-size:13px}.steps p{margin:5px 0 0;font-size:11px;line-height:1.55;color:var(--muted)}
+.stats{margin:26px 0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;background:linear-gradient(115deg,#c94600,#f07812 60%,#ffb31a);border-radius:16px;padding:26px 18px;color:#fff;text-align:center}.stats b{display:block;font-size:clamp(24px,3.4vw,38px);letter-spacing:-1px}.stats span{font-size:11px;opacity:.92}
+.reviews{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.reviews figure{margin:0;background:var(--card);border:1px solid var(--line);border-radius:13px;padding:18px;display:flex;flex-direction:column;justify-content:space-between;gap:14px}.reviews blockquote{margin:0;font-size:12px;line-height:1.65}.reviews figcaption{display:flex;align-items:center;gap:10px;font-size:11px}.reviews figcaption small{display:block;color:var(--muted);font-size:10px}.av{width:34px;height:34px;border-radius:50%;background:var(--soft);color:var(--orange);font-weight:800;display:grid;place-items:center}
+.faq{display:grid;gap:8px;max-width:820px}.faq details{background:var(--card);border:1px solid var(--line);border-radius:11px;padding:0 16px}.faq summary{cursor:pointer;padding:14px 0;font-weight:700;font-size:13px;list-style:none;display:flex;justify-content:space-between;gap:10px}.faq summary::-webkit-details-marker{display:none}.faq summary::after{content:"+";color:var(--orange);font-size:18px;line-height:1}.faq details[open] summary::after{content:"–"}.faq p{margin:0 0 14px;font-size:12px;line-height:1.65;color:var(--muted)}
+.cta{margin:26px 0 30px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;background:var(--soft);border:1px solid var(--line);border-radius:16px;padding:26px clamp(18px,4vw,40px)}.cta h2{margin:0 0 5px;font-size:22px;letter-spacing:-.5px}.cta p{margin:0;color:var(--muted);font-size:12px}.cta-btns{display:flex;gap:10px;flex-wrap:wrap}.cta .btn{padding:12px 20px}
+.to-top{position:fixed;right:18px;bottom:20px;width:40px;height:40px;border-radius:50%;border:0;background:var(--orange);color:#fff;font-size:18px;box-shadow:0 6px 18px #df5a0055;z-index:35;opacity:0;pointer-events:none;transform:translateY(10px);transition:opacity .25s,transform .25s}.to-top.show{opacity:1;pointer-events:auto;transform:none}
+.bottom-nav{display:none}
+@media(max-width:1000px){.coupons{grid-template-columns:repeat(2,minmax(0,1fr))}.steps{grid-template-columns:repeat(2,minmax(0,1fr))}.reviews{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:700px){body{padding-bottom:68px}.slide{min-height:250px;align-items:flex-end}.slide::before,.slide.r::before{background:linear-gradient(0deg,#140a04f0 0,#140a04a0 60%,#140a0420 100%)}.slide.r{justify-content:flex-start}.slide-body{padding:20px 20px 38px}.s4-big{right:16px;top:30%;font-size:72px}.car-btn{display:none}.stats{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.coupons{grid-template-columns:minmax(0,1fr)}.steps{grid-template-columns:minmax(0,1fr)}.cta{flex-direction:column;align-items:flex-start}.to-top{bottom:82px;right:14px}
+.bottom-nav{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));position:fixed;left:0;right:0;bottom:0;z-index:45;background:var(--cream);border-top:1px solid var(--line);padding:6px 4px calc(6px + env(safe-area-inset-bottom,0px));box-shadow:0 -6px 20px #0000000d}.bottom-nav a{min-width:0;display:flex;flex-direction:column;align-items:center;gap:3px;font-size:10px;font-weight:650;color:var(--muted);padding:4px 0}.bottom-nav svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}.bottom-nav a.on{color:var(--orange)}}
+
+/* ===== Founders banner (first ad slide) ===== */
+.slide.a0{display:block;min-height:0;aspect-ratio:1600/533;background:#fbe9d6}.slide.a0::before{display:none}.slide.a0 img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;display:block}
+@media(max-width:700px){.slide.a0{aspect-ratio:auto;min-height:215px}.slide.a0 img{object-position:100% 50%}}
+@media(min-width:701px) and (max-width:1000px){.slide.a0{min-height:210px}}
+@media(prefers-reduced-motion:reduce){.slides,.rv,.to-top{transition:none}html{scroll-behavior:auto}}
+.coupon.k1::before{background-image:url(assets/coupons/c-first.jpg)}.coupon.k2::before{background-image:url(assets/coupons/c-upi.jpg)}.coupon.k3::before{background-image:url(assets/coupons/c-weekend.jpg)}.coupon.k4::before{background-image:url(assets/coupons/c-student.jpg)}
+.a1{background-image:url(assets/ads/ad-hotel.jpg);background-position:center}.a2{background-image:url(assets/ads/ad-cab.jpg);background-position:center}.a3{background-image:url(assets/ads/ad-insure.jpg);background-position:center}.a4{background-image:url(assets/ads/ad-food.jpg);background-position:center}a.btn{display:inline-block}.ad-car{margin:0}@media(max-width:700px){.s1,.a1,.a3{background-position:14% center}.s2,.s4,.a2,.a4{background-position:86% center}.s3{background-position:20% center}}
+.coupons .coupon{width:100%;max-width:100%;min-width:0;overflow:hidden}.coupon .ct{min-width:0}.coupon .ct b,.coupon .ct small{overflow-wrap:anywhere}
+@media(max-width:700px){.desktop-break{display:none}}
+@media(max-width:560px){.search-panel{grid-template-columns:minmax(0,1fr)!important;gap:6px}.search-panel .swap-btn{justify-self:center;transform:rotate(90deg);width:34px;height:34px;margin:-2px 0}.search-panel .btn{grid-column:auto}.dots button{min-height:0}}
+</style>
+<link rel="stylesheet" href="shared/site.css">
+</head>
+<body>
+<div class="scroll-bar" aria-hidden="true"><i id="scrollBar"></i></div>
+<button class="to-top" id="toTop" aria-label="Back to top">↑</button>
+<nav class="bottom-nav" aria-label="Quick navigation">
+  <a href="#home" class="on" data-bn="home"><svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg><span>Home</span></a>
+  <a href="tracking/index.html"><svg viewBox="0 0 24 24"><path d="M12 22s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg><span>Track</span></a>
+  <a href="#services" data-bn="services"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg><span>Services</span></a>
+  <a href="history/index.html"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span>History</span></a>
+  <a href="profile/index.html"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg><span>Profile</span></a>
+</nav>
+<header>
+  <div class="container nav">
+    <a class="brand" href="#home" aria-label="TrackB home"><img class="logo-l" src="assets/smartbus-logo.png" alt="TrackB logo"><img class="logo-d" src="assets/smartbus-logo-dark.png" alt="" aria-hidden="true"><span>TrackB</span></a>
+    <nav class="nav-links" id="navLinks" aria-label="Main navigation">
+      <a href="#routes">Track Bus</a><a href="#services">Services</a><a href="#history" data-action="history">History</a><a href="#profile" data-action="profile">Profile</a>
+    </nav>
+    <div class="nav-actions"><button class="btn ghost" data-modal="login">Login</button><button class="btn" data-modal="signup">Sign Up</button><button class="menu-btn" id="menuBtn" aria-label="Toggle menu" aria-expanded="false">☰</button></div>
+  </div>
+</header>
+<main id="home" class="container">
+  <section class="hero-copy">
+    <div class="live-pill"><span class="live-dot"></span> Now tracking 500+ buses live</div>
+    <h1>Book, Track &amp; <span class="accent">Travel Smarter</span></h1>
+    <p>Experience the next generation of intercity travel. Real-time bus<br class="desktop-break"> tracking and seamless booking at your fingertips.</p>
+  </section>
+  <form class="search-panel" id="routeSearch">
+    <div class="field"><label for="fromCity">From</label><div class="field-wrap"><span>⌖</span><input id="fromCity" name="from" placeholder="Departure City" list="cities" required></div></div>
+    <button class="swap-btn" id="swapCities" type="button" aria-label="Swap departure and destination">↔</button>
+    <div class="field"><label for="toCity">To</label><div class="field-wrap"><span>⌖</span><input id="toCity" name="to" placeholder="Destination City" list="cities" required></div></div>
+    <button class="btn" type="submit">Search</button>
+    <datalist id="cities"><option>Delhi</option><option>Mumbai</option><option>Pune</option><option>Bengaluru</option><option>Hyderabad</option><option>Chennai</option><option>Kolkata</option><option>Ahmedabad</option><option>Jaipur</option><option>Lucknow</option><option>Chandigarh</option><option>Manali</option><option>Shimla</option><option>Amritsar</option><option>Dehradun</option><option>Goa (Panaji)</option><option>Kochi</option><option>Nagpur</option><option>Indore</option><option>Bhopal</option><option>Surat</option><option>Udaipur</option><option>Coimbatore</option></datalist>
+  </form>
+  <section class="offers" id="offers" aria-roledescription="carousel" aria-label="Offers and discounts">
+    <div class="slides" id="slides">
+      <article class="slide s0 r" aria-roledescription="slide" aria-label="1 of 5"><img src="assets/slides/slide-0.jpg" alt="" width="5152" height="632" fetchpriority="high"><div class="slide-body"><span class="tag">Live tracking</span><h2>Track your bus live, every kilometre</h2><p>See exactly where your bus is on the map, with live ETA and alerts. No more waiting at the stop.</p><div class="slide-cta"><a class="btn" href="tracking/index.html">Track now</a><span class="code" data-copy="TRACKB20">Code <b>TRACKB20</b></span></div></div></article>
+      <article class="slide s1 r" aria-roledescription="slide" aria-label="2 of 5" aria-hidden="true"><div class="slide-body"><span class="tag">Welcome offer</span><h2>Flat 20% OFF on your first booking</h2><p>Book any intercity route and save instantly. Valid on all TrackB buses.</p><div class="slide-cta"><button class="btn" data-goto="search">Book now</button><span class="code" data-copy="TRACKB20">Code <b>TRACKB20</b></span></div></div></article>
+      <article class="slide s2" aria-roledescription="slide" aria-label="3 of 5" aria-hidden="true"><div class="slide-body"><span class="tag">Pay smart</span><h2>10% cashback on UPI payments</h2><p>Track your bus live and pay securely from your phone. Up to ₹150 back.</p><div class="slide-cta"><button class="btn" data-goto="search">Plan a trip</button><span class="code" data-copy="UPI10">Code <b>UPI10</b></span></div></div></article>
+      <article class="slide s3 r" aria-roledescription="slide" aria-label="4 of 5" aria-hidden="true"><div class="slide-body"><span class="tag">Weekend getaway</span><h2>Up to 30% OFF on Friday to Sunday trips</h2><p>Escape the city for less. Limited seats on popular routes.</p><div class="slide-cta"><button class="btn" data-goto="search">Find buses</button><span class="code" data-copy="WEEKEND30">Code <b>WEEKEND30</b></span></div></div></article>
+      <article class="slide s4" aria-roledescription="slide" aria-label="5 of 5" aria-hidden="true"><div class="slide-body"><span class="tag">Refer &amp; earn</span><h2>Invite a friend, both get ₹100 off</h2><p>Share your link. When your friend completes their first trip, you each earn travel credit.</p><div class="slide-cta"><button class="btn" data-goto="offers2">See all offers</button><span class="code" data-copy="FRIEND100">Code <b>FRIEND100</b></span></div></div></article>
+    </div>
+    <button class="car-btn prev" id="slidePrev" aria-label="Previous offer">‹</button><button class="car-btn next" id="slideNext" aria-label="Next offer">›</button>
+    <div class="dots" id="dots" role="tablist" aria-label="Choose offer"></div><div class="car-progress" aria-hidden="true"><i id="carBar"></i></div>
+  </section>
+  <section class="routes-wrap rv" id="routes" aria-label="Popular bus routes">
+    <div class="section-heading"><div><h2>Live departures</h2><p>Popular routes leaving soon. Tap one to search seats on that route.</p></div><div class="strip-nav"><button class="small-btn" id="nextRoute" aria-label="Scroll to next routes">More ›</button></div></div>
+    <div class="route-strip" id="routeStrip">
+      <button class="route-card" data-route="Delhi to Manali"><span class="route-code">HRTC Volvo</span><span class="route-details"><span class="route-line">Delhi → Manali</span><span class="route-time"><span>06:30 PM</span><span class="seats">15 Seats left</span></span></span></button>
+      <button class="route-card" data-route="Mumbai to Pune"><span class="route-code">MSRTC Shivneri</span><span class="route-details"><span class="route-line">Mumbai → Pune</span><span class="route-time"><span>11:15 AM</span><span class="seats">4 Seats left</span></span></span></button>
+      <button class="route-card" data-route="Bengaluru to Hyderabad"><span class="route-code">SRS Travels</span><span class="route-details"><span class="route-line">Bengaluru → Hyderabad</span><span class="route-time"><span>09:45 PM</span><span class="seats">26 Seats left</span></span></span></button>
+      <button class="route-card" data-route="Jaipur to Delhi"><span class="route-code">RSRTC Volvo</span><span class="route-details"><span class="route-line">Jaipur → Delhi</span><span class="route-time"><span>05:45 PM</span><span class="seats">9 Seats left</span></span></span></button>
+      <button class="route-card" data-route="Chennai to Bengaluru"><span class="route-code">KSRTC Airavat</span><span class="route-details"><span class="route-line">Chennai → Bengaluru</span><span class="route-time"><span>02:20 PM</span><span class="seats">7 Seats left</span></span></span></button>
+    </div>
+  </section>
+  <section id="services" class="rv">
+    <div class="section-heading"><div><h2>Our Services</h2><p>Everything you need for a smooth, smart journey, all in one smart platform.</p></div><button class="small-btn" data-action="all-services">View All Services</button></div>
+    <div class="services">
+      <button class="service" data-service="Bus Booking"><span class="service-icon">▣</span><span>Bus Booking</span></button>
+      <button class="service" data-service="Live Tracking"><span class="service-icon">◫</span><span>Live Tracking</span></button>
+      <button class="service" data-service="Online Payment"><span class="service-icon">▤</span><span>Online Payment</span></button>
+      <button class="service" data-service="Seat Reservation"><span class="service-icon">♙</span><span>Seat Reservation</span></button>
+      <button class="service" data-service="Booking History"><span class="service-icon">◷</span><span>Booking History</span></button>
+      <button class="service" data-service="Route Search"><span class="service-icon">⌕</span><span>Route Search</span></button>
+      <button class="service" data-service="Cancel Booking"><span class="service-icon">⊗</span><span>Cancel Booking</span></button>
+      <button class="service" data-service="Parcel Delivery"><span class="service-icon">▦</span><span>Parcel Delivery</span></button>
+    </div>
+  </section>
+  <section class="promo rv" id="about">
+    <img src="assets/smart-travel-promo.jpg" loading="lazy" decoding="async" alt="Traveller using a smartphone to plan a journey">
+    <div class="promo-content"><span class="eyebrow">About SmartBus</span><h2>Revolutionizing Intercity Travel with Smart Tech</h2><p>We bring you the ultimate convenience in bus travel. With our advanced real-time tracking system, you always know exactly where your bus is. No more waiting in the dark.</p><p>Our platform offers instant booking, secure payments, and flexible seat options. Travel is made safer, easier, and with complete peace of mind.</p><button class="btn" data-action="discover">Discover More</button></div>
+  </section>
+  <section class="block rv" id="offers2">
+    <div class="section-heading"><div><h2>Offers &amp; discounts</h2><p>Tap a coupon to copy the code, then apply it at checkout.</p></div></div>
+    <div class="coupons">
+      <button class="coupon k1" data-copy="TRACKB20"><span class="pct">20%</span><span class="ct"><b>First booking</b><small>Up to ₹200 off</small></span><span class="cc">TRACKB20</span></button>
+      <button class="coupon k2" data-copy="UPI10"><span class="pct">10%</span><span class="ct"><b>UPI cashback</b><small>Up to ₹150 back</small></span><span class="cc">UPI10</span></button>
+      <button class="coupon k3" data-copy="WEEKEND30"><span class="pct">30%</span><span class="ct"><b>Weekend trips</b><small>Fri to Sun travel</small></span><span class="cc">WEEKEND30</span></button>
+      <button class="coupon k4" data-copy="STUDENT15"><span class="pct">15%</span><span class="ct"><b>Student pass</b><small>Valid student ID</small></span><span class="cc">STUDENT15</span></button>
+    </div>
+  </section>
+  <section class="block rv" id="how">
+    <div class="section-heading"><div><h2>How it works</h2><p>From search to seat in four easy steps.</p></div></div>
+    <ol class="steps">
+      <li><span class="n">1</span><b>Search your route</b><p>Enter where you are going and pick a date.</p></li>
+      <li><span class="n">2</span><b>Choose your seat</b><p>See the live seat map and select what suits you.</p></li>
+      <li><span class="n">3</span><b>Pay securely</b><p>UPI, cards and wallets, with instant confirmation.</p></li>
+      <li><span class="n">4</span><b>Track and travel</b><p>Follow your bus live and get timely alerts.</p></li>
+    </ol>
+  </section>
+  <section class="stats rv" aria-label="TrackB in numbers">
+    <div><b data-count="500" data-suffix="+">0</b><span>Buses tracked live</span></div>
+    <div><b data-count="120" data-suffix="+">0</b><span>Cities connected</span></div>
+    <div><b data-count="2" data-suffix="M+">0</b><span>Trips completed</span></div>
+    <div><b data-count="4.8" data-dec="1" data-suffix="★">0</b><span>Average rating</span></div>
+  </section>
+  <section class="block rv" id="reviews">
+    <div class="section-heading"><div><h2>What travellers say</h2><p>Sample feedback shown for demonstration.</p></div></div>
+    <div class="reviews">
+      <figure><blockquote>“Live tracking meant I never waited at the stop in the cold. Booking took under a minute.”</blockquote><figcaption><span class="av">A</span><span><b>Aarav Mehta</b><small>Pune to Mumbai</small></span></figcaption></figure>
+      <figure><blockquote>“Clean buses, on time, and the coupon applied without any fuss. Will book again.”</blockquote><figcaption><span class="av">S</span><span><b>Sneha Reddy</b><small>Bengaluru to Hyderabad</small></span></figcaption></figure>
+      <figure><blockquote>“Followed the Volvo on the map the whole night. The ETA was spot on when we reached Kullu.”</blockquote><figcaption><span class="av">V</span><span><b>Vikram Singh</b><small>Delhi to Manali</small></span></figcaption></figure>
+      <figure><blockquote>“UPI payment went through instantly and my seat was confirmed on WhatsApp right away.”</blockquote><figcaption><span class="av">P</span><span><b>Priya Nair</b><small>Kochi to Coimbatore</small></span></figcaption></figure>
+      <figure><blockquote>“Seat selection and delay alerts are exactly what intercity travel in India needed.”</blockquote><figcaption><span class="av">R</span><span><b>Rahul Verma</b><small>Lucknow to Delhi</small></span></figcaption></figure>
+      <figure><blockquote>“Booked for my parents and could track their bus from home. Very reassuring.”</blockquote><figcaption><span class="av">A</span><span><b>Ananya Iyer</b><small>Chennai to Bengaluru</small></span></figcaption></figure>
+    </div>
+  </section>
+  <section class="block rv" id="faq">
+    <div class="section-heading"><div><h2>Frequently asked questions</h2></div></div>
+    <div class="faq">
+      <details><summary>How do I track my bus?</summary><p>Open Track Bus from the menu or the bottom bar and enter your booking. The map updates live with the bus position and estimated arrival.</p></details>
+      <details><summary>Can I cancel or change a booking?</summary><p>Yes. Go to History, open the trip and choose Cancel. Refund timing depends on how close to departure you cancel.</p></details>
+      <details><summary>How do I use a coupon code?</summary><p>Copy a code from the offers above and paste it in the promo field at checkout. Only one code can be used per booking.</p></details>
+      <details><summary>Which payment methods are supported?</summary><p>UPI, debit and credit cards (Visa, Mastercard, RuPay) and saved payment methods from your profile.</p></details>
+    </div>
+  </section>
+  <section class="cta rv" aria-label="Get started">
+    <div><h2>Ready to travel smarter?</h2><p>Create a free account and get 20% off your first trip.</p></div>
+    <div class="cta-btns"><button class="btn" data-modal="signup">Sign up free</button><button class="btn outline" data-goto="search">Search buses</button></div>
+  </section>
+  <section class="block rv" id="ads" aria-label="Advertisements">
+    <div class="section-heading"><div><h2>Sponsored</h2><p>Offers from TrackB and partners. Sample ads.</p></div></div>
+    <div class="offers ad-car" aria-roledescription="carousel" aria-label="Advertisements"><div class="slides"><article class="slide a0" aria-roledescription="slide" aria-label="1 of 5"><img src="assets/ads/ad-founders.jpg" alt="TrackB founders: Devesh Kaushik, Co-Founder &amp; CTO; Gaurav Kenwat, Founder &amp; CEO; Nishant Paul, Co-Founder &amp; CFO. We're building the future of public transport." width="1600" height="533" loading="lazy"></article><article class="slide a1 " aria-roledescription="slide" aria-label="2 of 5" aria-hidden="true"><div class="slide-body"><span class="tag">Ad · Hotels</span><h2>Manali stays up to 40% off</h2><p>Book a hotel near your drop point and save when you travel with TrackB.</p><div class="slide-cta"><a class="btn" href="pages/contact.html?topic=advertise">View stays</a><span class="code" data-copy="STAY40">Code <b>STAY40</b></span></div></div></article><article class="slide a2 r" aria-roledescription="slide" aria-label="3 of 5" aria-hidden="true"><div class="slide-body"><span class="tag">Ad · Cabs</span><h2>Cab waiting at your stop</h2><p>Pre-book a pickup from the bus stand or airport. Flat ₹50 off your first ride.</p><div class="slide-cta"><a class="btn" href="pages/contact.html?topic=advertise">Book a cab</a><span class="code" data-copy="CAB50">Code <b>CAB50</b></span></div></div></article><article class="slide a3 " aria-roledescription="slide" aria-label="4 of 5" aria-hidden="true"><div class="slide-body"><span class="tag">Ad · Insurance</span><h2>Travel cover from just ₹19</h2><p>Protect your trip and baggage against delays, loss and cancellations.</p><div class="slide-cta"><a class="btn" href="pages/contact.html?topic=advertise">Get covered</a><span class="code" data-copy="SAFE19">Code <b>SAFE19</b></span></div></div></article><article class="slide a4 r" aria-roledescription="slide" aria-label="5 of 5" aria-hidden="true"><div class="slide-body"><span class="tag">Ad · Food</span><h2>15% off chai and meals on the way</h2><p>Eat well at partner stops along your route. Show your ticket to claim.</p><div class="slide-cta"><a class="btn" href="pages/contact.html?topic=advertise">Find stops</a><span class="code" data-copy="EAT15">Code <b>EAT15</b></span></div></div></article></div><button class="car-btn prev" aria-label="Previous ad">‹</button><button class="car-btn next" aria-label="Next ad">›</button><div class="dots" role="tablist" aria-label="Choose ad"></div><div class="car-progress" aria-hidden="true"><i></i></div></div>
+  </section>
+</main>
+<footer class="sbf"><div class="sbf-in"><div class="sbf-grid">
+<div><a class="sbf-brand" href="index.html"><img src="assets/smartbus-logo-dark.png" alt=""><span>TrackB</span></a><p class="sbf-about">Premium intercity travel experience with trust, comfort &amp; safety at heart.</p>
+<div class="sbf-soc"><a href="https://www.facebook.com/" target="_blank" rel="noopener" aria-label="TrackB on Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 8h3V4h-3a4 4 0 0 0-4 4v3H7v4h3v6h4v-6h3l1-4h-4V8z"/></svg></a><a href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="TrackB on Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/></svg></a><a href="https://x.com/" target="_blank" rel="noopener" aria-label="TrackB on X"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4l16 16M20 4 4 20"/></svg></a><a href="https://www.linkedin.com/" target="_blank" rel="noopener" aria-label="TrackB on LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9v11M6 4.5v.01M10 20v-7a4 4 0 0 1 8 0v7M10 9v11"/></svg></a><a href="https://www.youtube.com/" target="_blank" rel="noopener" aria-label="TrackB on YouTube"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="4"/><path d="m10 9 5 3-5 3z"/></svg></a></div></div>
+<div><h3>Quick Links</h3><ul class="sbf-links"><li><a href="index.html">Home</a></li><li><a href="services/index.html?s=booking">Book Ticket</a></li><li><a href="tracking/index.html">Track Bus</a></li><li><a href="delivery/index.html">Parcel Delivery</a></li><li><a href="history/index.html">My Trips</a></li><li><a href="pages/help.html">Help Center</a></li></ul></div>
+<div><h3>Company</h3><ul class="sbf-links"><li><a href="pages/about.html">About Us</a></li><li><a href="developers/index.html">Developers</a></li><li><a href="pages/careers.html">Careers</a></li><li><a href="pages/terms.html">Terms &amp; Conditions</a></li><li><a href="pages/privacy.html">Privacy Policy</a></li><li><a href="pages/contact.html">Contact Us</a></li></ul></div>
+<div class="sbf-contact-col"><h3>Contact Details</h3><ul class="sbf-contact"><li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg><a href="https://www.google.com/maps/search/?api=1&amp;query=Sector+62+Noida+Uttar+Pradesh+201309" target="_blank" rel="noopener">SmartBus HQ, Sector 62, Noida, Uttar Pradesh 201309</a></li><li><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg><a href="mailto:support@smartbus.in">support@smartbus.in</a></li><li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg><a href="tel:+919876543210">+91 98765 43210</a></li></ul></div>
+<div class="sbf-nl"><h3>Newsletter</h3><p>Subscribe for updates and offers.</p><form id="sbfNews" novalidate><input id="sbfEmail" type="email" placeholder="Enter your email" aria-label="Your email address" autocomplete="email"><button type="submit">Subscribe</button><div class="sbf-msg" id="sbfMsg" role="status" aria-live="polite"></div></form></div>
+</div><div class="sbf-bottom"><span>© 2026 SmartBus. All rights reserved.</span><nav aria-label="Legal"><a href="pages/terms.html">Terms</a><a href="pages/privacy.html">Privacy</a><a href="pages/help.html">Help</a></nav></div></div></footer>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal"><button class="modal-close" id="closeModal" aria-label="Close dialog">×</button><h2 id="modalTitle">Welcome back</h2><p id="modalDescription">Sign in to manage your SmartBus journeys.</p><form class="modal-form" id="accountForm"><div id="nameField" hidden><label for="accountName">Full name</label><input id="accountName" name="name" placeholder="Enter your full name"></div><div><label for="accountEmail">Email address</label><input id="accountEmail" name="email" type="email" placeholder="you@example.com" required></div><div><label for="accountPassword">Password</label><input id="accountPassword" name="password" type="password" placeholder="At least 8 characters" minlength="8" required></div><button class="btn" id="accountSubmit" type="submit">Login</button></form><div class="modal-switch"><span id="switchText">New to SmartBus?</span> <button id="switchMode" type="button">Create account</button></div></div>
+</div>
+<script>
+const $ = (s,root=document)=>root.querySelector(s);
+const $$ = (s,root=document)=>[...root.querySelectorAll(s)];
+const toastEl=$('#toast'); let toastTimer;
+function toast(message){toastEl.textContent=message;toastEl.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>toastEl.classList.remove('show'),3000)}
+const navLinks=$('#navLinks'),menuBtn=$('#menuBtn');
+menuBtn.addEventListener('click',()=>{const open=navLinks.classList.toggle('open');menuBtn.setAttribute('aria-expanded',String(open));menuBtn.textContent=open?'×':'☰'});
+$$('#navLinks a').forEach(a=>a.addEventListener('click',()=>{navLinks.classList.remove('open');menuBtn.setAttribute('aria-expanded','false');menuBtn.textContent='☰'}));
+$('#swapCities').addEventListener('click',()=>{const a=$('#fromCity'),b=$('#toCity');[a.value,b.value]=[b.value,a.value];toast('Departure and destination swapped.')});
+$('#routeSearch').addEventListener('submit',e=>{e.preventDefault();const from=$('#fromCity').value.trim(),to=$('#toCity').value.trim();if(from.toLowerCase()===to.toLowerCase()){toast('Choose two different cities to search.');return}location.href='services/index.html?s=search&from='+encodeURIComponent(from)+'&to='+encodeURIComponent(to)});
+const strip=$('#routeStrip');
+strip.addEventListener('click',e=>{const card=e.target.closest('.route-card');if(!card)return;$$('.route-card').forEach(c=>c.classList.remove('selected'));card.classList.add('selected');const [x,y]=card.dataset.route.split(' to ');location.href='services/index.html?s=search&from='+encodeURIComponent(x)+'&to='+encodeURIComponent(y)});
+/* Live departures come from the server (next bus on each headline route, seats left from real bookings) */
+(async()=>{try{const r=await SB.get('/departures');if(!r.departures.length)return;const E=SB.esc;
+strip.innerHTML=r.departures.map(d=>`<button class="route-card" data-route="${E(d.from)} to ${E(d.to)}"><span class="route-code">${E(d.operator)}</span><span class="route-details"><span class="route-line">${E(d.from)} → ${E(d.to)}</span><span class="route-time"><span>${E(d.dep)}${d.date!==new Date().toLocaleDateString('en-CA')?' · tomorrow':''}</span><span class="seats">${d.seatsLeft} Seats left</span></span></span></button>`).join('')}catch(e){}})();
+$('#nextRoute').addEventListener('click',()=>$('#routeStrip').scrollBy({left:240,behavior:'smooth'}));
+const SVPAGE={'Route Search':'services/index.html?s=search','Bus Booking':'services/index.html?s=booking','Seat Reservation':'services/index.html?s=seats','Online Payment':'services/index.html?s=pay','Cancel Booking':'services/index.html?s=cancel','Live Tracking':'tracking/index.html','Booking History':'history/index.html','Parcel Delivery':'delivery/index.html'};
+$$('[data-service]').forEach(btn=>btn.addEventListener('click',()=>{const u=SVPAGE[btn.dataset.service];if(u)window.location.href=u}));
+const backdrop=$('#modalBackdrop');let mode='login';
+function openModal(nextMode){const target=nextMode==='signup'?'signup':'login';window.location.href='trackb-signup/index.html?mode='+target}
+function closeModal(){backdrop.classList.remove('open');document.body.style.overflow=''}
+function updateModal(){const signup=mode==='signup';$('#modalTitle').textContent=signup?'Create your account':'Welcome back';$('#modalDescription').textContent=signup?'Join SmartBus and start your smarter travel journey.':'Sign in to manage your SmartBus journeys.';$('#nameField').hidden=!signup;$('#accountName').required=signup;$('#accountSubmit').textContent=signup?'Create Account':'Login';$('#switchText').textContent=signup?'Already have an account?':'New to SmartBus?';$('#switchMode').textContent=signup?'Login':'Create account'}
+$$('[data-modal]').forEach(b=>b.addEventListener('click',()=>openModal(b.dataset.modal)));
+$('#closeModal').addEventListener('click',closeModal);backdrop.addEventListener('click',e=>{if(e.target===backdrop)closeModal()});document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+$('#switchMode').addEventListener('click',()=>{mode=mode==='login'?'signup':'login';updateModal()});
+$('#accountForm').addEventListener('submit',e=>{e.preventDefault();const email=$('#accountEmail').value.trim();if(mode==='signup'&&$('#accountPassword').value.length<8){toast('Password must be at least 8 characters.');return}toast(mode==='signup'?`Demo account form validated for ${email}. Connect a backend to create the account.`:`Login form validated for ${email}. Connect authentication to sign in.`);closeModal();e.target.reset()});
+$$('[data-action]').forEach(el=>el.addEventListener('click',e=>{const action=el.dataset.action;if(action==='profile'){e.preventDefault();window.location.href='profile/index.html'}else if(action==='history'){e.preventDefault();window.location.href='history/index.html'}else if(action==='all-services'){window.location.href='services/index.html'}else if(action==='discover'){window.location.href='pages/about.html'}else{e.preventDefault();const labels={careers:'Careers information',terms:'Terms & Conditions',privacy:'Privacy Policy',contact:'Contact Us'};toast(`${labels[action]||'More information'}: connect this link to your published page.`)}}));
+/* Prefill the search when arriving from History -> Book again */
+(()=>{const q=new URLSearchParams(location.search),f=q.get('from'),t=q.get('to');if(f&&t){$('#fromCity').value=f;$('#toCity').value=t;toast(`Route filled in: ${f} → ${t}`)}})();
+/* Offer carousel */
+function initCar(box){const track=$('.slides',box),slides=$$('.slide',track),dots=$('.dots',box),bar=$('.car-progress i',box),N=slides.length,DELAY=5000;let i=0,t0=0,raf=0,paused=false,timer;
+const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+slides.forEach((_,k)=>{const b=document.createElement('button');b.type='button';b.setAttribute('aria-label','Show offer '+(k+1));b.addEventListener('click',()=>{go(k);restart()});dots.appendChild(b)});
+function go(n){i=(n+N)%N;track.style.transform=`translateX(${-i*100}%)`;slides.forEach((sl,k)=>sl.setAttribute('aria-hidden',String(k!==i)));$$('button',dots).forEach((b,k)=>b.classList.toggle('on',k===i))}
+function tick(ts){if(!t0)t0=ts;const r=Math.min((ts-t0)/DELAY,1);bar.style.width=(r*100)+'%';if(r>=1){go(i+1);t0=0}raf=requestAnimationFrame(tick)}
+function start(){if(reduce||paused)return;cancelAnimationFrame(raf);t0=0;raf=requestAnimationFrame(tick)}
+function stop(){cancelAnimationFrame(raf);bar.style.width='0'}
+function restart(){stop();start()}
+$('.car-btn.prev',box).addEventListener('click',()=>{go(i-1);restart()});$('.car-btn.next',box).addEventListener('click',()=>{go(i+1);restart()});
+box.addEventListener('mouseenter',()=>{paused=true;stop()});box.addEventListener('mouseleave',()=>{paused=false;start()});box.addEventListener('focusin',()=>{paused=true;stop()});box.addEventListener('focusout',()=>{paused=false;start()});
+document.addEventListener('visibilitychange',()=>{document.hidden?stop():(paused||start())});
+let x0=null;box.addEventListener('touchstart',e=>{x0=e.touches[0].clientX;paused=true;stop()},{passive:true});box.addEventListener('touchend',e=>{if(x0!==null){const dx=e.changedTouches[0].clientX-x0;if(Math.abs(dx)>40)go(i+(dx<0?1:-1))}x0=null;paused=false;start()});
+go(0);start()}
+$$('.offers').forEach(initCar);
+/* Scroll to search / copy coupon codes */
+function goSearch(){const el=$('#routeSearch');el.scrollIntoView({behavior:'smooth',block:'center'});setTimeout(()=>$('#fromCity').focus({preventScroll:true}),500)}
+document.addEventListener('click',e=>{const g=e.target.closest('[data-goto]');if(g){const t=g.dataset.goto;if(t==='search')goSearch();else{const el=document.getElementById(t);el&&el.scrollIntoView({behavior:'smooth'})}return}
+const c=e.target.closest('[data-copy]');if(c){const code=c.dataset.copy;const done=()=>toast(`Coupon ${code} copied. Apply it at checkout.`);try{navigator.clipboard.writeText(code).then(done,done)}catch(x){done()}}});
+/* Scroll effects: progress bar, back-to-top, reveal, counters, bottom-nav highlight */
+(()=>{const bar=$('#scrollBar'),top=$('#toTop');let ticking=false;
+const upd=()=>{const h=document.documentElement,max=h.scrollHeight-h.clientHeight,y=h.scrollTop;bar.style.width=(max>0?y/max*100:0)+'%';top.classList.toggle('show',y>600);ticking=false;
+const sv=$('#services');const bn=$$('.bottom-nav [data-bn]');if(sv&&bn.length){const on=sv.getBoundingClientRect().top<innerHeight*.5?'services':'home';bn.forEach(a=>a.classList.toggle('on',a.dataset.bn===on))}};
+addEventListener('scroll',()=>{if(!ticking){ticking=true;requestAnimationFrame(upd)}},{passive:true});upd();
+top.addEventListener('click',()=>scrollTo({top:0,behavior:'smooth'}));
+const count=el=>{const end=parseFloat(el.dataset.count),dec=+el.dataset.dec||0,suf=el.dataset.suffix||'',t0=performance.now();const f=n=>{const r=Math.min((n-t0)/1400,1),v=end*(1-Math.pow(1-r,3));el.textContent=v.toFixed(dec)+suf;r<1&&requestAnimationFrame(f)};requestAnimationFrame(f)};
+const final=()=>$$('[data-count]').forEach(el=>el.textContent=(+el.dataset.count).toFixed(+el.dataset.dec||0)+(el.dataset.suffix||''));
+if(!('IntersectionObserver' in window)||matchMedia('(prefers-reduced-motion:reduce)').matches){$$('.rv').forEach(r=>r.classList.add('in'));final();return}
+const io=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){en.target.classList.add('in');$$('[data-count]',en.target).forEach(count);io.unobserve(en.target)}}),{threshold:.12});
+$$('.rv').forEach(r=>io.observe(r))})();
+</script>
+<script src="shared/site.js" data-root="" defer></script>
+</body>
+</html>
